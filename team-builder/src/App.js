@@ -1,22 +1,40 @@
 import React, {useState} from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Worker from "./worker"
+import Form from "./form.js"
 
 
 function App() {
 
 const [workers, setWorkers] = useState([{
-  
-  fname:"Tom", lname:"Jane", role:"Hacker"},
-  {fname:"John", lname:"Doe", role:"Conman"},
-  {fname:"Riley", lname:"Huey", role:"Cartoonist"}]);
+ 
+  name:"Tom", email:"TomJane@yahoo.com", role:"Hacker"},
+  {name:"John", email:"JohnDoe@gmail.com", role:"Conman"},
+  {name:"Riley", email:"RileyHuey@outlook.com", role:"Cartoonist"}]);
 
+  const [formValues, setFormValues] = useState({name:"", email:"", role:""})
 
+const addWorker = (name, email, role) => {
+  setWorkers(existing => [...existing, {
+    name: name,
+    email: email,
+    role: role
+  }])
+}
 
+const editWorker = worker => {
+setFormValues(worker)
+}
 
 
   return (
-    
+    <div>
+      {workers.map(worker => (
+        <Worker worker={worker} onEdit={editWorker}/>
+
+      ))}
+      <Form addWorker={addWorker} formValues={formValues}/>
+    </div>
   );
 }
 

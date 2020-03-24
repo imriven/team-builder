@@ -1,12 +1,11 @@
 import React from "react";
 
-const Worker = props => {
-
+const Worker = ({worker, onEdit}) => {
+    const {name, email, role} = worker
     return (
         <div>
-           <p> {props.workers.fname} <p>
-           <p> {props.workers.lname} <p>
-           <p> {props.workers.role} <p>
+          <p> {name} {email} ({role}) <button onClick={() => onEdit(worker)}>Edit</button></p>
+         
         </div>
     )
 }
